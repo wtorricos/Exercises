@@ -4,7 +4,7 @@ using System;
 [assembly: CLSCompliant(true)]
 namespace ConsoleApp
 {
-    class Program
+    sealed class Program
     {
         static void Main(string[] args)
         {
