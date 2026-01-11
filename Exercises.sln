@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.452
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exercises", "Exercises\Exercises.csproj", "{BAEB9503-64A2-40B6-81E7-D4FEB3855235}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ExercisesFSharp", "ExercisesFSharp\ExercisesFSharp.fsproj", "{C8DDD17C-A0EE-4B7D-82AC-23188F831208}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassicComputerScienceProblems", "ClassicComputerScienceProblems\ClassicComputerScienceProblems.csproj", "{145E0F04-36F9-41A9-9304-D5755013872E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeriouslyGoodSoftware", "SeriouslyGoodSoftware\SeriouslyGoodSoftware.csproj", "{41DF79E8-D6D4-4113-9C8F-1FA0B677C6B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{145E0F04-36F9-41A9-9304-D5755013872E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{145E0F04-36F9-41A9-9304-D5755013872E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{145E0F04-36F9-41A9-9304-D5755013872E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41DF79E8-D6D4-4113-9C8F-1FA0B677C6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41DF79E8-D6D4-4113-9C8F-1FA0B677C6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41DF79E8-D6D4-4113-9C8F-1FA0B677C6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41DF79E8-D6D4-4113-9C8F-1FA0B677C6B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
