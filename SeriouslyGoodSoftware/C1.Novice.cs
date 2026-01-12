@@ -97,12 +97,14 @@ public sealed class C1
         Assert.Equal(8, d.X);
 
         a.ConnectTo(b);
+        // a.ConnectTo(b); // case not covered
         Assert.Equal(6, a.X);
         Assert.Equal(6, b.X);
         Assert.Equal(0, c.X);
         Assert.Equal(8, d.X);
 
         b.ConnectTo(c);
+        // a.ConnectTo(c); // case not covered
         Assert.Equal(4, a.X);
         Assert.Equal(4, b.X);
         Assert.Equal(4, c.X);
