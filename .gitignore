@@ -244,3 +244,5 @@ _Pvt_Extensions
 .ionide/symbolCache.db
 
 .ionide
+
+BenchmarkDotNet.Artifacts/
