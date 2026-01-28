@@ -17,7 +17,7 @@
 ///     - Containers can be filled or drained
 ///     - Containers can be connected and disconnected at any time
 /// </summary>
-public sealed class C1
+public sealed class C1Novice
 {
     /// <summary>
     ///     Novice implementation of a container.
@@ -26,7 +26,7 @@ public sealed class C1
     ///     This implementation has a lot of issues like time and space efficiency, maintainability, readability and reusability.
     ///     On top of that it doesn't have error handling or considers edge cases like graphs of containers indirectly connected.
     /// </summary>
-    private sealed class Container
+    public sealed class Container
     {
         public Container(decimal x = 0)
         {
@@ -67,7 +67,7 @@ public sealed class C1
             }
         }
 
-        public void Fill(decimal x)
+        public void AddWater(decimal x)
         {
             decimal y = x / N;
             for (int i = 0; i < N; i++)
@@ -89,8 +89,8 @@ public sealed class C1
         Assert.Equal(0, c.X);
         Assert.Equal(0, d.X);
 
-        a.Fill(12);
-        d.Fill(8);
+        a.AddWater(12);
+        d.AddWater(8);
         Assert.Equal(12, a.X);
         Assert.Equal(0, b.X);
         Assert.Equal(0, c.X);

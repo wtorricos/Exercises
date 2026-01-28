@@ -2,11 +2,11 @@
 
 public sealed class C1Personal
 {
-    private sealed class Container(decimal amount = 0)
+    public sealed class Container(decimal amount = 0)
     {
         Guid id = Guid.CreateVersion7();
 
-        Dictionary<Guid, Container> connectedContainers = new();
+        readonly Dictionary<Guid, Container> connectedContainers = new();
 
         public decimal Amount { get; set; }
 
@@ -14,19 +14,20 @@ public sealed class C1Personal
         {
             connectedContainers.TryAdd(other.id, other);
             other.connectedContainers.TryAdd(id, this);
-            Fill(0);
+            AddWater(0); // distribute water evenly
         }
 
-        public void Fill(decimal amount)
+        public void AddWater(decimal amount)
         {
             Dictionary<Guid, Container> allContainers = new() { { id, this } };
-            foreach (Container direct in GetDirectConnectedContainers())
+            foreach (Container direct in connectedContainers.Values)
             {
-                foreach (Container indirect in direct.GetDirectConnectedContainers())
+                if (!allContainers.TryAdd(direct.id, direct)) continue;
+
+                foreach (Container indirect in direct.connectedContainers.Values)
                 {
                     allContainers.TryAdd(indirect.id, indirect);
                 }
-                allContainers.TryAdd(direct.id, direct);
             }
 
             decimal newAmount = (allContainers.Values.Sum(c => c.Amount) + amount) / allContainers.Count;
@@ -35,8 +36,6 @@ public sealed class C1Personal
                 container.Amount = newAmount;
             }
         }
-
-        List<Container> GetDirectConnectedContainers() => connectedContainers.Values.ToList();
     }
 
     [Fact]
@@ -51,8 +50,8 @@ public sealed class C1Personal
         Assert.Equal(0, c.Amount);
         Assert.Equal(0, d.Amount);
 
-        a.Fill(12);
-        d.Fill(8);
+        a.AddWater(12);
+        d.AddWater(8);
         Assert.Equal(12, a.Amount);
         Assert.Equal(0, b.Amount);
         Assert.Equal(0, c.Amount);
