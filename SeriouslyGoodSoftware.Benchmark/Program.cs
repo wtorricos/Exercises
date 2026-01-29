@@ -56,6 +56,21 @@ public class WaterContainerBenchmarks
         a.ConnectTo(c);
         c.ConnectTo(d);
     }
+
+    [Benchmark]
+    public void SharedGroup()
+    {
+        C31SharedGroup.Container a = new();
+        C31SharedGroup.Container b = new();
+        C31SharedGroup.Container c = new();
+        C31SharedGroup.Container d = new();
+        a.AddWater(12);
+        d.AddWater(8);
+        a.ConnectTo(b);
+        b.ConnectTo(c);
+        // a.ConnectTo(c); // case not covered
+        c.ConnectTo(d);
+    }
 }
 
 // Run with: dotnet run -c Release --filter *WaterContainerBenchmarks*
