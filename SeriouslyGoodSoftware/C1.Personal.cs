@@ -2,7 +2,7 @@
 
 public sealed class C1Personal
 {
-    public sealed class Container(decimal amount = 0)
+    public sealed class Container : IContainer
     {
         Guid id = Guid.CreateVersion7();
 
@@ -15,6 +15,11 @@ public sealed class C1Personal
             connectedContainers.TryAdd(other.id, other);
             other.connectedContainers.TryAdd(id, this);
             AddWater(0); // distribute water evenly
+        }
+
+        public void ConnectTo(IContainer other)
+        {
+            ConnectTo((other as Container)!);
         }
 
         public void AddWater(decimal amount)

@@ -2,7 +2,7 @@
 
 public sealed class C2Starter
 {
-    public sealed class Container
+    public sealed class Container : IContainer
     {
 
         private HashSet<Container> group;
@@ -43,6 +43,11 @@ public sealed class C2Starter
             {
                 c.Amount = newAmount;
             }
+        }
+
+        public void ConnectTo(IContainer other)
+        {
+            ConnectTo((other as Container)!);
         }
 
         /* Adds water to this container. */

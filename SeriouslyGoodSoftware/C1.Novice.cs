@@ -26,11 +26,11 @@ public sealed class C1Novice
     ///     This implementation has a lot of issues like time and space efficiency, maintainability, readability and reusability.
     ///     On top of that it doesn't have error handling or considers edge cases like graphs of containers indirectly connected.
     /// </summary>
-    public sealed class Container
+    public sealed class Container : IContainer
     {
-        public Container(decimal x = 0)
+        public Container()
         {
-            X = x;
+            X = 0;
             N = 1;
             G = new Container[100];
             G[0] = this;
@@ -65,6 +65,13 @@ public sealed class C1Novice
                 G[i].N = N;
                 G[i].X = z;
             }
+        }
+
+        public decimal Amount => X;
+
+        public void ConnectTo(IContainer other)
+        {
+            ConnectTo((other as Container)!);
         }
 
         public void AddWater(decimal x)

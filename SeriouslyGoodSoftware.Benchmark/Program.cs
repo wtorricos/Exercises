@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using System.Text;
 
 namespace SeriouslyGoodSoftware.Benchmark;
 
@@ -13,63 +12,44 @@ public class WaterContainerBenchmarks
     }
 
     [Benchmark]
-    public void Novice()
+    public void C1Novice()
     {
-        C1Novice.Container a = new();
-        C1Novice.Container b = new();
-        C1Novice.Container c = new();
-        C1Novice.Container d = new();
-        a.AddWater(12);
-        d.AddWater(8);
-        a.ConnectTo(b);
-        b.ConnectTo(c);
-        // a.ConnectTo(c); // case not covered
-        c.ConnectTo(d);
+        RunBenchmark<C1Novice.Container>();
     }
 
     [Benchmark]
-    public void Personal()
+    public void C1Personal()
     {
-        C1Personal.Container a = new();
-        C1Personal.Container b = new();
-        C1Personal.Container c = new();
-        C1Personal.Container d = new();
-        a.AddWater(12);
-        d.AddWater(8);
-        a.ConnectTo(b);
-        b.ConnectTo(c);
-        a.ConnectTo(c);
-        c.ConnectTo(d);
+        RunBenchmark<C1Personal.Container>();
     }
 
     [Benchmark]
-    public void Starter()
+    public void C2Starter()
     {
-        C2Starter.Container a = new();
-        C2Starter.Container b = new();
-        C2Starter.Container c = new();
-        C2Starter.Container d = new();
-        a.AddWater(12);
-        d.AddWater(8);
-        a.ConnectTo(b);
-        b.ConnectTo(c);
-        a.ConnectTo(c);
-        c.ConnectTo(d);
+        RunBenchmark<C2Starter.Container>();
     }
 
     [Benchmark]
-    public void SharedGroup()
+    public void C3SharedGroup()
     {
-        C31SharedGroup.Container a = new();
-        C31SharedGroup.Container b = new();
-        C31SharedGroup.Container c = new();
-        C31SharedGroup.Container d = new();
-        a.AddWater(12);
-        d.AddWater(8);
-        a.ConnectTo(b);
-        b.ConnectTo(c);
-        // a.ConnectTo(c); // case not covered
-        c.ConnectTo(d);
+        RunBenchmark<C31SharedGroup.Container>();
+    }
+
+    [Benchmark]
+    public void C3CircularList()
+    {
+        RunBenchmark<C32CircularList.Container>();
+    }
+
+    void RunBenchmark<T>() where T : IContainer, new()
+    {
+        T last = new();
+        for(int i = 0; i < 10; i++)
+        {
+            T next = new();
+            next.AddWater(last.Amount + 2);
+            last.ConnectTo(next);
+        }
     }
 }
 

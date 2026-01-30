@@ -1,34 +1,37 @@
 ﻿namespace SeriouslyGoodSoftware;
 
-public sealed class C31SharedGroup
+public sealed class C32CircularList
 {
     /// <summary>
-    /// Use a shared group object to track connected containers.
-    /// This will allow to reduce Amount and AddWater to O(1).
-    /// While ConnectTo becomes O(n).
+    /// This time the implementation uses a circular linked list to track connected containers.
+    /// This is a tradeoff that allows ConnectTo to be O(1) while keeping AddWater O(1) as well.
+    /// However, retrieving the Amount will force a recalculation making it O(n).
     /// Note that this implementation does not handle connecting the same container multiple times.
     /// </summary>
-    public sealed class Container : IContainer
+    public class Container : IContainer
     {
-        private Group group;
+        private decimal amount;
+
+        private Container next;
 
         public Container()
         {
-            group = new Group();
-            group.Containers.AddFirst(this);
-            group.TotalAmount = 0;
+            next = this;
+            amount = 0;
         }
 
-        public decimal Amount => group.TotalAmount / group.Containers.Count;
+        public decimal Amount
+        {
+            get
+            {
+                UpdateGroup();
+                return amount;
+            }
+        }
 
         public void ConnectTo(Container other)
         {
-            foreach (Container container in other.group.Containers)
-            {
-                group.Containers.AddLast(container);
-            }
-            group.TotalAmount += other.group.TotalAmount;
-            other.group = group;
+            (next, other.next) = (other.next, next);
         }
 
         public void ConnectTo(IContainer other)
@@ -38,14 +41,26 @@ public sealed class C31SharedGroup
 
         public void AddWater(decimal amount)
         {
-            group.TotalAmount += amount;
+            this.amount += amount;
         }
 
-        private class Group
-        {
-            public LinkedList<Container> Containers { get; set; } = new();
-
-            public decimal TotalAmount { get; set; }
+        private void UpdateGroup() {
+            Container current = this;
+            decimal totalAmount = 0;
+            int groupSize = 0;
+            // First pass: collect amounts and count
+            do {
+                totalAmount += current.amount;
+                groupSize++;
+                current = current.next;
+            } while (current != this);
+            decimal newAmount = totalAmount / groupSize;
+            current = this;
+            // Second pass: update amounts
+            do {
+                current.amount = newAmount;
+                current = current.next;
+            } while (current != this);
         }
     }
 
