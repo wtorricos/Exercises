@@ -30,15 +30,21 @@ public class WaterContainerBenchmarks
     }
 
     [Benchmark]
-    public void C3SharedGroup()
+    public void C31SharedGroup()
     {
         RunBenchmark<C31SharedGroup.Container>();
     }
 
     [Benchmark]
-    public void C3CircularList()
+    public void C32CircularList()
     {
         RunBenchmark<C32CircularList.Container>();
+    }
+
+    [Benchmark]
+    public void C33UnionFind()
+    {
+        RunBenchmark<C33UnionFind.Container>();
     }
 
     void RunBenchmark<T>() where T : IContainer, new()
