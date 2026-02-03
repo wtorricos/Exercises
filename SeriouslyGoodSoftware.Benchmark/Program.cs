@@ -47,6 +47,12 @@ public class WaterContainerBenchmarks
         RunBenchmark<C33UnionFind.Container>();
     }
 
+    [Benchmark]
+    public void C4Memory2()
+    {
+        RunBenchmark<C4Memory2.Container>();
+    }
+
     void RunBenchmark<T>() where T : IContainer, new()
     {
         T last = new();
