@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Exercises.Easy
@@ -31,7 +32,7 @@ namespace Exercises.Easy
         }
 
         [Fact]
-        public void PerformanceTest()
+        public async Task PerformanceTest()
         {
             string s = "a";
             long n = 1000000000000;
@@ -42,8 +43,7 @@ namespace Exercises.Easy
                 Assert.Equal(expected, actual);
             });
 
-            var completed = Task.WaitAny(new Task[] { solveTask }, millisecondsTimeout: 500);
-            Assert.True(0 == completed, "The solution took too much to execute");
+            await solveTask.WaitAsync(TimeSpan.FromMilliseconds(500));
         }
     }
 }

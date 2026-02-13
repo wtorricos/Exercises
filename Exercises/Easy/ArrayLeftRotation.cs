@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -31,7 +32,7 @@ namespace Exercises.Easy
         }
 
         [Fact]
-        public void PerformanceTest()
+        public async Task PerformanceTest()
         {
             var a = Enumerable.Range(0, 1000000);
             var d = 1000000;
@@ -43,8 +44,7 @@ namespace Exercises.Easy
                 Assert.Equal(expected, actual);
             });
 
-            var completed = Task.WaitAny(new Task[] { solveTask }, millisecondsTimeout: 2000);
-            Assert.True(0 == completed, "The solution took too much to execute");
+            await solveTask.WaitAsync(TimeSpan.FromMilliseconds(2000));
         }
     }
 }

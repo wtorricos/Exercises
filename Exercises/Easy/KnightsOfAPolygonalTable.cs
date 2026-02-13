@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -57,7 +58,7 @@ namespace Exercises.Easy
         }
 
         [Fact]
-        public void Performance()
+        public async Task Performance()
         {
             var solveTask = Task.Run(() =>
             {
@@ -75,9 +76,7 @@ namespace Exercises.Easy
                 KnightsOfAPolygonalTableSolution.Solve(input1, input2.ToString(), input2.ToString());
             });
 
-            var completed = Task.WaitAny(new Task[] { solveTask }, millisecondsTimeout: 20000);
-            Assert.True(0 == completed, "The solution took too much to execute");
-            Assert.True(solveTask.IsCompletedSuccessfully, "Did not complete successfully");
+            await solveTask.WaitAsync(TimeSpan.FromMilliseconds(2000));
         }
     }
 }

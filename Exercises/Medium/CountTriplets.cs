@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -59,7 +60,7 @@ namespace Exercises.Medium
         }
 
         [Fact]
-        public void Performance()
+        public async Task Performance()
         {
             var arr = Enumerable.Range(1, 100000)
                 .Select(i => (long)1237)
@@ -72,9 +73,7 @@ namespace Exercises.Medium
                 Assert.Equal(166661666700000, actual);
             });
 
-            var completed = Task.WaitAny(new Task[] { solveTask }, millisecondsTimeout: 20000);
-            Assert.True(0 == completed, "The solution took too much to execute");
-            Assert.True(solveTask.IsCompletedSuccessfully, "Did not complete successfully");
+            await solveTask.WaitAsync(TimeSpan.FromMilliseconds(2000));
         }
     }
 }

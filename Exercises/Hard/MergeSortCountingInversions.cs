@@ -33,7 +33,7 @@ namespace Exercises.Hard
         }
 
         [Fact]
-        public void Performance()
+        public async Task Performance()
         {
             var arr = Enumerable.Repeat(1, 10^5).ToArray();
 
@@ -44,8 +44,7 @@ namespace Exercises.Hard
                 Assert.Equal(0, actual.Item2);
             });
 
-            var completed = Task.WaitAny(new Task[] { solveTask }, millisecondsTimeout: 2000);
-            Assert.True(0 == completed, "The solution took too much to execute");
+            await solveTask.WaitAsync(TimeSpan.FromMilliseconds(2000));
         }
     }
 }

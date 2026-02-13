@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="ClassicComputerScienceProblems/ClassicComputerScienceProblems.csproj" />
+  <Project Path="Console/ConsoleApp.csproj" />
+  <Project Path="Exercises/Exercises.csproj" />
+  <Project Path="ExercisesFSharp/ExercisesFSharp.fsproj" />
+  <Project Path="SeriouslyGoodSoftware.Benchmark/SeriouslyGoodSoftware.Benchmark.csproj" />
+  <Project Path="SeriouslyGoodSoftware/SeriouslyGoodSoftware.csproj" />
+</Solution>
