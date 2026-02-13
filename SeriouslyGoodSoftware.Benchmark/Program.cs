@@ -6,6 +6,8 @@ namespace SeriouslyGoodSoftware.Benchmark;
 [MemoryDiagnoser] // adds allocation/GC columns
 public class WaterContainerBenchmarks
 {
+    public readonly int Iterations = 10;
+
     [GlobalSetup]
     public void Setup()
     {
@@ -56,7 +58,7 @@ public class WaterContainerBenchmarks
     void RunBenchmark<T>() where T : IContainer, new()
     {
         T last = new();
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < Iterations; i++)
         {
             T next = new();
             next.AddWater(last.Amount + 2);
