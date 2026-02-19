@@ -50,6 +50,12 @@ public class WaterContainerBenchmarks
     }
 
     [Benchmark]
+    public void C33UnionFind2()
+    {
+        RunBenchmark<C33UnionFind2.Container>();
+    }
+
+    [Benchmark]
     public void C4Memory2()
     {
         RunBenchmark<C4Memory2.Container>();
